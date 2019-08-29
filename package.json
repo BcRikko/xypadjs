@@ -4,7 +4,7 @@
   "description": "XYPad controller component using Canvas API",
   "main": "xypad.min.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "parcel index.html"
   },
   "repository": {
     "type": "git",
@@ -16,5 +16,9 @@
   "bugs": {
     "url": "https://github.com/BcRikko/xypadjs/issues"
   },
-  "homepage": "https://github.com/BcRikko/xypadjs#readme"
+  "homepage": "https://github.com/BcRikko/xypadjs#readme",
+  "devDependencies": {
+    "parcel": "^1.12.3",
+    "typescript": "^3.6.2"
+  }
 }
