@@ -1,0 +1,20 @@
+{
+  "name": "xypadjs",
+  "version": "0.0.0-development",
+  "description": "XYPad controller component using Canvas API",
+  "main": "xypad.min.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BcRikko/xypadjs.git"
+  },
+  "keywords": [],
+  "author": "BcRikko (https://github.com/BcRikko)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/BcRikko/xypadjs/issues"
+  },
+  "homepage": "https://github.com/BcRikko/xypadjs#readme"
+}
