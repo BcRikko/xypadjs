@@ -81,7 +81,7 @@ Removes XYPad drag events.
 
 XYPadのドラッグイベントを削除します。
 
-## getPoint (under development)
+### getPoint (under development)
 
 Gets the value of the current pointer.
 
