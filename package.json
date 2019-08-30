@@ -19,6 +19,7 @@
   "homepage": "https://github.com/BcRikko/xypadjs#readme",
   "devDependencies": {
     "parcel": "^1.12.3",
+    "sass": "^1.22.10",
     "typescript": "^3.6.2"
   }
 }

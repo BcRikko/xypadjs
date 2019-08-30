@@ -6,13 +6,15 @@ XYPad.js is XYPad controller component using Canvas API.
 
 XYPad.jsはCanvasAPIを使った2次元パッドコントローラのコンポーネントです。
 
-![xypad](https://user-images.githubusercontent.com/5305599/63904838-49be1f80-ca4d-11e9-99f1-e7a147132d1a.gif)
+## Examples
+
+![rikko](https://user-images.githubusercontent.com/5305599/64018969-df020680-cb68-11e9-8289-e5660f282cb6.gif)
 
 
 ## :rocket: Getting started
 
 ```html
-<div id="#app"></div>
+<div id="app"></div>
 <p id="output"></p>
 ```
 
@@ -25,7 +27,7 @@ new XYPad({
   xRange: { min: -100, max: 100 },
   yRange: { min: -100, max: 100 },
   callback: (pointer) => {
-    document.querySelector('#output').innerHtml = pointer.toString()
+    document.querySelector('#output').innerHTML = pointer.toString()
   })
 })
 ```
@@ -87,6 +89,11 @@ Gets the value of the current pointer.
 
 現在のポインターの値を取得します。
 
+### setPoint (under development)
+
+Sets the value of the current pointer.
+
+ポインターの値を設定します。
 
 
 ## :copyright: Copyright and license
