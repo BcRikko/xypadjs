@@ -4,7 +4,8 @@
   "description": "XYPad controller component using Canvas API",
   "main": "xypad.min.js",
   "scripts": {
-    "dev": "parcel index.html"
+    "dev": "parcel index.html",
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -18,8 +19,15 @@
   },
   "homepage": "https://github.com/BcRikko/xypadjs#readme",
   "devDependencies": {
+    "@types/jest": "^24.0.18",
+    "jest": "^24.9.0",
     "parcel": "^1.12.3",
     "sass": "^1.22.10",
+    "ts-jest": "^24.0.2",
     "typescript": "^3.6.2"
+  },
+  "jest": {
+    "preset": "ts-jest",
+    "testEnvironment": "jsdom"
   }
 }
