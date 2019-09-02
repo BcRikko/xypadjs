@@ -96,6 +96,22 @@ export class XYPad {
     return new Pointer(x, y)
   }
 
-  // TODO: destroy
-  // TODO: getPointer
+  public movePointerTo(pointer: Pointer): void
+  public movePointerTo(x: number, y: number): void
+  public movePointerTo(x: number | Pointer, y?: number) {
+    if (x instanceof Pointer) {
+      this.draggablePointer.point = x
+      return
+    }
+
+    this.draggablePointer.point = new Pointer(x, y)
+  }
+
+  public destroy(): void {
+    this.draggablePointer.destroy()
+  }
+
+  public getPointer(): Pointer {
+    return this.draggablePointer.point
+  }
 }
