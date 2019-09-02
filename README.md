@@ -1,12 +1,10 @@
 # :control_knobs: XYPad.js
 
-:warning: under development - 開発途中 :warnig:
-
 XYPad.js is XYPad controller component using Canvas API.
 
 XYPad.jsはCanvasAPIを使った2次元パッドコントローラのコンポーネントです。
 
-## Examples
+## :thinking_face: Examples
 
 ![rikko](https://user-images.githubusercontent.com/5305599/64018969-df020680-cb68-11e9-8289-e5660f282cb6.gif)
 
@@ -20,77 +18,69 @@ XYPad.jsはCanvasAPIを使った2次元パッドコントローラのコンポ�
 
 ```js
 new XYPad({
+  // Specifies the selector of the parent element. XYPad creates a Canvas element within parent element.
+  // 親要素のセレクターを指定します。XYPadは親要素の中にCanvas要素を作成します。
   el: '#app',
+
+  // (Option)Specifies the color of the current position pointer. The default color is `black `.
+  // (省略可能)現在位置を示すポインターの色を指定します。デフォルトは`black`です。
   pointerColor: '#23CBF5',
+  
+  // (Option)Specifies the size of the Canvas elements to display. The default is 300px x 300px.
+  // (省略可能)表示するCanvas要素のサイズを指定します。デフォルトは300x300です。
   width: 300,
   height: 300,
+
+  // (Option)Specifies the maximum and minimum values that XYPad can take in two dimensions. The default is `xRange: {min: -100, max: 100}` `yRange: {min: -100, max: 100}`.
+  // (省略可能)XYPadが取りうる2次元上の最大値と最小値を指定します。デフォルトは`xRange: {min: -100, max: 100}` `yRange: {min: -100, max: 100}`です。
   xRange: { min: -100, max: 100 },
   yRange: { min: -100, max: 100 },
+
+  // (Option)Callback for pointer drag event. The argument value is a Pointer class.
+  // (省略可能)ポインターのドラッグイベントのコールバックです。引数はPointerクラスです。
   callback: (pointer) => {
     document.querySelector('#output').innerHTML = pointer.toString()
+
+    // current point
+    const { x, y } = p.point
+
+    // { x: 50, y: 30 }
+    console.log(p.toString())
   })
 })
 ```
 
-
-## :books: Parameters
-
-### el
-
-Specifies the selector of the parent element. XYPad creates a Canvas element within parent element.
-
-親要素のセレクターを指定します。XYPadは親要素の中にCanvas要素を作成します。
-
-### pointerColor (option)
-
-Specifies the color of the current position pointer. The default color is `black `.
-
-現在位置を示すポインターの色を指定します。デフォルトは`black`です。
-
-### width, height (option)
-
-Specifies the size of the Canvas elements to display. The default is 300px x 300px.
-
-表示するCanvas要素のサイズを指定します。デフォルトは300x300です。
-
-### xRange, yRange (option)
-
-Specifies the maximum and minimum values that XYPad can take in two dimensions. The default is `xRange: {min: -100, max: 100}` `yRange: {min: -100, max: 100}`.
-
-XYPadが取りうる2次元上の最大値と最小値を指定します。デフォルトは`xRange: {min: -100, max: 100}` `yRange: {min: -100, max: 100}`です。
-
-### callback (option)
-
-Callback for pointer drag event. The argument value is a Pointer class.
-
-ポインターのドラッグイベントのコールバックです。引数はPointerクラスです。
-
-```ts
-callback (p: Pointer) {
-  // current point
-  const { x, y } = p.point
-
-  // { x: 50, y: 30 }
-  console.log(p.toString())
-}
-```
-
 ## :book: API
 
-### destroy (under development)
+### destroy
 
+```ts
+xyPad.destroy()
+```
 Removes XYPad drag events.
 
 XYPadのドラッグイベントを削除します。
 
-### getPoint (under development)
+### getPointer
 
+```ts
+const p = xyPad.getPointer()
+const { x, y } = p.point
+```
 Gets the value of the current pointer.
 
 現在のポインターの値を取得します。
 
-### setPoint (under development)
+### movePointerTo
 
+```ts
+const newPoint = new Pointer(10, 20)
+xyPad.movePointerTo(newPoint)
+
+// or
+
+xyPad.movePointerTo(10, 20)
+```
 Sets the value of the current pointer.
 
 ポインターの値を設定します。
