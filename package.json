@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "parcel index.html",
     "test": "jest",
-    "lint": "eslint --ext .ts ."
+    "lint": "eslint --ext .ts .",
+    "build": "rollup -c"
   },
   "repository": {
     "type": "git",
@@ -29,8 +30,12 @@
     "jest": "^24.9.0",
     "parcel": "^1.12.3",
     "prettier": "^1.18.2",
+    "rollup": "^1.20.3",
+    "rollup-plugin-typescript": "^1.0.1",
+    "rollup-plugin-uglify": "^6.0.3",
     "sass": "^1.22.10",
     "ts-jest": "^24.0.2",
+    "tslib": "^1.10.0",
     "typescript": "^3.6.2"
   },
   "jest": {

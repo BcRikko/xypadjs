@@ -13,7 +13,7 @@ interface Parameter {
   callback?: (pointer: Pointer) => void
 }
 
-export class XYPad {
+export default class XYPad {
   private readonly canvas: HTMLCanvasElement
   private readonly context: CanvasRenderingContext2D
   private readonly callback: Parameter['callback']
