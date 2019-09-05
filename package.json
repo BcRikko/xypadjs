@@ -5,7 +5,8 @@
   "main": "xypad.min.js",
   "scripts": {
     "dev": "parcel index.html",
-    "test": "jest"
+    "test": "jest",
+    "lint": "eslint --ext .ts ."
   },
   "repository": {
     "type": "git",
@@ -20,8 +21,14 @@
   "homepage": "https://github.com/BcRikko/xypadjs#readme",
   "devDependencies": {
     "@types/jest": "^24.0.18",
+    "@typescript-eslint/eslint-plugin": "^2.1.0",
+    "@typescript-eslint/parser": "^2.1.0",
+    "eslint": "^6.3.0",
+    "eslint-config-prettier": "^6.2.0",
+    "eslint-plugin-prettier": "^3.1.0",
     "jest": "^24.9.0",
     "parcel": "^1.12.3",
+    "prettier": "^1.18.2",
     "sass": "^1.22.10",
     "ts-jest": "^24.0.2",
     "typescript": "^3.6.2"
@@ -29,5 +36,40 @@
   "jest": {
     "preset": "ts-jest",
     "testEnvironment": "jsdom"
+  },
+  "eslintConfig": {
+    "env": {
+      "es6": true
+    },
+    "extends": [
+      "eslint:recommended",
+      "plugin:@typescript-eslint/eslint-recommended",
+      "plugin:prettier/recommended",
+      "prettier",
+      "prettier/@typescript-eslint"
+    ],
+    "plugins": [
+      "@typescript-eslint",
+      "prettier"
+    ],
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+      "sourceType": "module",
+      "ecmaFeatures": {
+        "modules": true
+      }
+    },
+    "rules": {
+      "no-unused-vars": "off",
+      "@typescript-eslint/no-unused-vars": "error",
+      "prettier/prettier": [
+        "error",
+        {
+          "semi": false,
+          "singleQuote": true,
+          "printWidth": 120
+        }
+      ]
+    }
   }
 }

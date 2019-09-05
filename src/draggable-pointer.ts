@@ -1,10 +1,10 @@
-import { Pointer } from "./pointer"
+import { Pointer } from './pointer'
 
 interface Parameter {
   element: HTMLCanvasElement
   pointer?: Pointer
-  onStartDrag?: DragEvent,
-  onDragging?: DragEvent,
+  onStartDrag?: DragEvent
+  onDragging?: DragEvent
   onFinishDrag?: DragEvent
 }
 
@@ -23,9 +23,9 @@ export class DraggablePointer {
   constructor({
     element,
     pointer = new Pointer(),
-    onStartDrag = () => { },
-    onDragging = () => { },
-    onFinishDrag = () => { }
+    onStartDrag = () => {},
+    onDragging = () => {},
+    onFinishDrag = () => {}
   }: Parameter) {
     this.element = element
     this.onStartDrag = onStartDrag
@@ -67,7 +67,9 @@ export class DraggablePointer {
   }
 
   private drag(ev: MouseEvent) {
-    if (!this.isDragging) { return }
+    if (!this.isDragging) {
+      return
+    }
 
     const pagePoint = new Pointer(ev.pageX, ev.pageY)
     this.currentPoint = this.forceInElement(pagePoint.sub(this.startPoint).add(this.canvasPoint), this.element)
@@ -76,7 +78,9 @@ export class DraggablePointer {
   }
 
   private finishDrag(ev: MouseEvent) {
-    if (!this.isDragging) { return }
+    if (!this.isDragging) {
+      return
+    }
     this.isDragging = false
 
     const pagePoint = new Pointer(ev.pageX, ev.pageY)
@@ -89,10 +93,18 @@ export class DraggablePointer {
     const { x: px, y: py } = pointer.point
     let x = px
     let y = py
-    if (x < 0) { x = 0 }
-    if (w < x) { x = w }
-    if (y < 0) { y = 0 }
-    if (h < y) { y = h }
+    if (x < 0) {
+      x = 0
+    }
+    if (w < x) {
+      x = w
+    }
+    if (y < 0) {
+      y = 0
+    }
+    if (h < y) {
+      y = h
+    }
 
     return new Pointer(x, y)
   }

@@ -1,4 +1,4 @@
-import { Pointer } from "../src/pointer";
+import { Pointer } from '../src/pointer'
 
 describe('Pointer', () => {
   describe('moveTo', () => {
@@ -31,7 +31,7 @@ describe('Pointer', () => {
 
       const q1 = new Pointer(20, 10)
       expect(p.equals(q1)).toBeFalsy()
-      
+
       const q2 = new Pointer(10, 20)
       expect(p.equals(q2)).toBeTruthy()
     })
@@ -40,7 +40,7 @@ describe('Pointer', () => {
   describe('add', () => {
     test('add(x,y)', () => {
       const p = new Pointer(10, 20)
-      
+
       const q1 = p.add(10, 20)
       expect(q1.point).toEqual({ x: 20, y: 40 })
 
@@ -56,7 +56,7 @@ describe('Pointer', () => {
       expect(q.point).toEqual({ x: 20, y: 40 })
     })
   })
-  
+
   describe('sub', () => {
     test('sub(x,y)', () => {
       const p = new Pointer(10, 20)

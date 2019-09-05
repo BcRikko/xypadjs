@@ -1,7 +1,7 @@
-import { Pointer } from "./pointer"
-import { DraggablePointer } from "./draggable-pointer"
-import { Range } from "./range";
-import { XYRange } from "./xyrange";
+import { Pointer } from './pointer'
+import { DraggablePointer } from './draggable-pointer'
+import { Range } from './range'
+import { XYRange } from './xyrange'
 
 interface Parameter {
   el: string
@@ -30,7 +30,7 @@ export class XYPad {
     height = 300,
     xRange = { min: -100, max: 100 },
     yRange = { min: -100, max: 100 },
-    callback = () => { }
+    callback = () => {}
   }: Parameter) {
     const parent = document.querySelector(el)
     this.canvas = document.createElement('canvas')
@@ -53,14 +53,14 @@ export class XYPad {
     this.draggablePointer = new DraggablePointer({
       element: this.canvas,
       pointer: new Pointer(width / 2, height / 2),
-      onStartDrag: (p) => {
+      onStartDrag: p => {
         this.pointRadius *= this.pointZoomRate
         this.render(p)
       },
-      onDragging: (p) => {
+      onDragging: p => {
         this.render(p)
       },
-      onFinishDrag: (p) => {
+      onFinishDrag: p => {
         this.pointRadius /= this.pointZoomRate
         this.render(p)
       }
@@ -69,20 +69,14 @@ export class XYPad {
     this.render(this.draggablePointer.point)
   }
 
-  private render(pointer: Pointer) {
+  private render(pointer: Pointer): void {
     this.context.clearRect(0, 0, this.canvas.width, this.canvas.height)
     this.context.save()
 
     this.context.fillStyle = this.pointerColor
     this.context.beginPath()
     const p = pointer.sub(this.pointRadius / (this.pointZoomRate * 2), this.pointRadius / (this.pointZoomRate * 2))
-    this.context.arc(
-      p.point.x,
-      p.point.y,
-      this.pointRadius,
-      0,
-      2 * Math.PI
-    )
+    this.context.arc(p.point.x, p.point.y, this.pointRadius, 0, 2 * Math.PI)
     this.context.fill()
     this.context.restore()
 
@@ -90,15 +84,15 @@ export class XYPad {
   }
 
   private calcPoint(pointer: Pointer): Pointer {
-    const x = (this.xyRange.xDistance / this.canvas.width) * pointer.point.x - (this.xyRange.xDistance / 2)
-    const y = (this.xyRange.yDistance / this.canvas.width) * pointer.point.y - (this.xyRange.yDistance / 2)
+    const x = (this.xyRange.xDistance / this.canvas.width) * pointer.point.x - this.xyRange.xDistance / 2
+    const y = (this.xyRange.yDistance / this.canvas.width) * pointer.point.y - this.xyRange.yDistance / 2
 
     return new Pointer(x, y)
   }
 
   public movePointerTo(pointer: Pointer): void
   public movePointerTo(x: number, y: number): void
-  public movePointerTo(x: number | Pointer, y?: number) {
+  public movePointerTo(x: number | Pointer, y?: number): void {
     if (x instanceof Pointer) {
       this.draggablePointer.point = x
       return

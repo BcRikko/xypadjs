@@ -1,4 +1,13 @@
 {
+  "eslint.autoFixOnSave": true,
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    {
+      "language": "typescript",
+      "autoFix": true
+    }
+  ],
   "files.exclude": {
     "**/.git": true,
     "**/.svn": true,

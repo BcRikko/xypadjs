@@ -1,5 +1,5 @@
-import { XYRange } from "../src/xyrange";
-import { Range } from "../src/range";
+import { XYRange } from '../src/xyrange'
+import { Range } from '../src/range'
 
 describe('XYRange', () => {
   const xRange: Range = { min: -100, max: 100 }

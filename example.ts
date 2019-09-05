@@ -1,4 +1,4 @@
-import { XYPad } from "./src/xypad"
+import { XYPad } from './src/xypad'
 
 const rikko = document.querySelector('.bcrikko') as HTMLElement
 const output = document.querySelector('#output')

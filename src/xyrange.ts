@@ -1,4 +1,4 @@
-import { RangePoint, Range } from "./range";
+import { RangePoint, Range } from './range'
 
 interface Parameter {
   x: Range

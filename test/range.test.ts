@@ -1,4 +1,4 @@
-import { RangePoint } from "../src/range";
+import { RangePoint } from '../src/range'
 
 describe('RangePoint', () => {
   test('distance', () => {
