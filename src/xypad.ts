@@ -1,5 +1,5 @@
 import { Pointer } from './pointer'
-import { DraggablePointer } from './draggable-pointer'
+import { DraggablePointer, DragEvent } from './draggable-pointer'
 import { Range } from './range'
 import { XYRange } from './xyrange'
 
@@ -10,6 +10,9 @@ interface Parameter {
   height?: number
   xRange?: Range
   yRange?: Range
+  onDragStart?: DragEvent
+  onDragMove?: DragEvent
+  onDragEnd?: DragEvent
   callback?: (pointer: Pointer) => void
 }
 
@@ -19,6 +22,9 @@ export default class XYPad {
   private readonly callback: Parameter['callback']
   private readonly pointerColor: Parameter['pointerColor']
   private readonly xyRange: XYRange
+  private readonly onDragStart: Parameter['onDragStart']
+  private readonly onDragMove: Parameter['onDragMove']
+  private readonly onDragEnd: Parameter['onDragEnd']
   private draggablePointer: DraggablePointer
   private pointRadius = 4
   private readonly pointZoomRate = 2
@@ -30,6 +36,9 @@ export default class XYPad {
     height = 300,
     xRange = { min: -100, max: 100 },
     yRange = { min: -100, max: 100 },
+    onDragStart = () => {},
+    onDragMove = () => {},
+    onDragEnd = () => {},
     callback = () => {}
   }: Parameter) {
     const parent = document.querySelector(el)
@@ -49,20 +58,29 @@ export default class XYPad {
       y: yRange
     })
 
+    this.onDragStart = onDragStart
+    this.onDragMove = onDragMove
+    this.onDragEnd = onDragEnd
     this.callback = callback
     this.draggablePointer = new DraggablePointer({
       element: this.canvas,
       pointer: new Pointer(width / 2, height / 2),
-      onStartDrag: p => {
+      onDragStart: p => {
         this.pointRadius *= this.pointZoomRate
         this.render(p)
+        this.onDragStart(p)
+        this.callback(this.calcPoint(p))
       },
-      onDragging: p => {
+      onDragMove: p => {
         this.render(p)
+        this.onDragMove(p)
+        this.callback(this.calcPoint(p))
       },
-      onFinishDrag: p => {
+      onDragEnd: p => {
         this.pointRadius /= this.pointZoomRate
         this.render(p)
+        this.onDragEnd(p)
+        this.callback(this.calcPoint(p))
       }
     })
 
@@ -79,8 +97,6 @@ export default class XYPad {
     this.context.arc(p.point.x, p.point.y, this.pointRadius, 0, 2 * Math.PI)
     this.context.fill()
     this.context.restore()
-
-    this.callback(this.calcPoint(pointer))
   }
 
   private calcPoint(pointer: Pointer): Pointer {

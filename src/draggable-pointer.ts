@@ -3,18 +3,18 @@ import { Pointer } from './pointer'
 interface Parameter {
   element: HTMLCanvasElement
   pointer?: Pointer
-  onStartDrag?: DragEvent
-  onDragging?: DragEvent
-  onFinishDrag?: DragEvent
+  onDragStart?: DragEvent
+  onDragMove?: DragEvent
+  onDragEnd?: DragEvent
 }
 
-type DragEvent = (pointer: Pointer) => void
+export type DragEvent = (pointer: Pointer) => void
 
 export class DraggablePointer {
   private readonly element: Parameter['element']
-  private readonly onStartDrag: Parameter['onStartDrag']
-  private readonly onDragging: Parameter['onDragging']
-  private readonly onFinishDrag: Parameter['onFinishDrag']
+  private readonly onDragStart: Parameter['onDragStart']
+  private readonly onDragMove: Parameter['onDragMove']
+  private readonly onDragEnd: Parameter['onDragEnd']
   private currentPoint: Parameter['pointer']
   private canvasPoint = new Pointer()
   private startPoint = new Pointer()
@@ -23,14 +23,14 @@ export class DraggablePointer {
   constructor({
     element,
     pointer = new Pointer(),
-    onStartDrag = () => {},
-    onDragging = () => {},
-    onFinishDrag = () => {}
+    onDragStart: onDragStart = () => {},
+    onDragMove: onDragMove = () => {},
+    onDragEnd: onDragEnd = () => {}
   }: Parameter) {
     this.element = element
-    this.onStartDrag = onStartDrag
-    this.onDragging = onDragging
-    this.onFinishDrag = onFinishDrag
+    this.onDragStart = onDragStart
+    this.onDragMove = onDragMove
+    this.onDragEnd = onDragEnd
     this.currentPoint = pointer
 
     this.initialize()
@@ -45,28 +45,28 @@ export class DraggablePointer {
   }
 
   private initialize() {
-    this.element.addEventListener('mousedown', this.startDrag.bind(this))
-    document.addEventListener('mousemove', this.drag.bind(this))
-    document.addEventListener('mouseup', this.finishDrag.bind(this))
+    this.element.addEventListener('mousedown', this.dragStart.bind(this))
+    document.addEventListener('mousemove', this.dragMove.bind(this))
+    document.addEventListener('mouseup', this.dragEnd.bind(this))
   }
 
   public destroy() {
-    this.element.removeEventListener('mousedown', this.startDrag.bind(this))
-    document.removeEventListener('mousemove', this.drag.bind(this))
-    document.removeEventListener('mouseup', this.finishDrag.bind(this))
+    this.element.removeEventListener('mousedown', this.dragStart.bind(this))
+    document.removeEventListener('mousemove', this.dragMove.bind(this))
+    document.removeEventListener('mouseup', this.dragEnd.bind(this))
   }
 
-  private startDrag(ev: MouseEvent) {
+  private dragStart(ev: MouseEvent) {
     this.isDragging = true
 
     this.currentPoint.moveTo(ev.offsetX, ev.offsetY)
     this.canvasPoint.moveTo(ev.offsetX, ev.offsetY)
     this.startPoint.moveTo(ev.pageX, ev.pageY)
 
-    this.onStartDrag(this.currentPoint)
+    this.onDragStart(this.currentPoint)
   }
 
-  private drag(ev: MouseEvent) {
+  private dragMove(ev: MouseEvent) {
     if (!this.isDragging) {
       return
     }
@@ -74,10 +74,10 @@ export class DraggablePointer {
     const pagePoint = new Pointer(ev.pageX, ev.pageY)
     this.currentPoint = this.forceInElement(pagePoint.sub(this.startPoint).add(this.canvasPoint), this.element)
 
-    this.onDragging(this.currentPoint)
+    this.onDragMove(this.currentPoint)
   }
 
-  private finishDrag(ev: MouseEvent) {
+  private dragEnd(ev: MouseEvent) {
     if (!this.isDragging) {
       return
     }
@@ -86,7 +86,7 @@ export class DraggablePointer {
     const pagePoint = new Pointer(ev.pageX, ev.pageY)
     this.currentPoint = this.forceInElement(pagePoint.sub(this.startPoint).add(this.canvasPoint), this.element)
 
-    this.onFinishDrag(this.currentPoint)
+    this.onDragEnd(this.currentPoint)
   }
 
   private forceInElement(pointer: Pointer, { width: w, height: h }: HTMLCanvasElement): Pointer {
