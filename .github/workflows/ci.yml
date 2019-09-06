@@ -6,6 +6,9 @@ on:
       - master
     paths:
       - '*.ts'
+  pull_request:
+    paths:
+      - '*.ts'
 
 jobs:
   test:
