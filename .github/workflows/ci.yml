@@ -1,11 +1,5 @@
 name: Node CI
 
-environment: &environment
-  runs-on: ubuntu-latest
-  strategy:
-    matrix:
-      node-version: [8, 10, 12]
-
 on:
   push:
     branches:
@@ -19,7 +13,10 @@ on:
 jobs:
   lint:
     name: eslint
-    <<: *environment
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [8, 10, 12]
     steps:
     - uses: actions/checkout@v1
     - name: Use Node.js ${{ matrix.node-version }}
@@ -34,7 +31,10 @@ jobs:
         CI: true
   test:
     name: Library test
-    <<: *environment
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [8, 10, 12]
     steps:
     - uses: actions/checkout@v1
     - name: Use Node.js ${{ matrix.node-version }}
