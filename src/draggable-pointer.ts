@@ -23,9 +23,9 @@ export class DraggablePointer {
   constructor({
     element,
     pointer = new Pointer(),
-    onDragStart: onDragStart = () => {},
-    onDragMove: onDragMove = () => {},
-    onDragEnd: onDragEnd = () => {}
+    onDragStart: onDragStart = (): void => {},
+    onDragMove: onDragMove = (): void => {},
+    onDragEnd: onDragEnd = (): void => {}
   }: Parameter) {
     this.element = element
     this.onDragStart = onDragStart
@@ -44,19 +44,19 @@ export class DraggablePointer {
     this.currentPoint = pointer
   }
 
-  private initialize() {
+  private initialize(): void {
     this.element.addEventListener('mousedown', this.dragStart.bind(this))
     document.addEventListener('mousemove', this.dragMove.bind(this))
     document.addEventListener('mouseup', this.dragEnd.bind(this))
   }
 
-  public destroy() {
+  public destroy(): void {
     this.element.removeEventListener('mousedown', this.dragStart.bind(this))
     document.removeEventListener('mousemove', this.dragMove.bind(this))
     document.removeEventListener('mouseup', this.dragEnd.bind(this))
   }
 
-  private dragStart(ev: MouseEvent) {
+  private dragStart(ev: MouseEvent): void {
     this.isDragging = true
 
     this.currentPoint.moveTo(ev.offsetX, ev.offsetY)
@@ -66,7 +66,7 @@ export class DraggablePointer {
     this.onDragStart(this.currentPoint)
   }
 
-  private dragMove(ev: MouseEvent) {
+  private dragMove(ev: MouseEvent): void {
     if (!this.isDragging) {
       return
     }
@@ -77,7 +77,7 @@ export class DraggablePointer {
     this.onDragMove(this.currentPoint)
   }
 
-  private dragEnd(ev: MouseEvent) {
+  private dragEnd(ev: MouseEvent): void {
     if (!this.isDragging) {
       return
     }

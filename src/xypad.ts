@@ -36,10 +36,10 @@ export default class XYPad {
     height = 300,
     xRange = { min: -100, max: 100 },
     yRange = { min: -100, max: 100 },
-    onDragStart = () => {},
-    onDragMove = () => {},
-    onDragEnd = () => {},
-    callback = () => {}
+    onDragStart = (): void => {},
+    onDragMove = (): void => {},
+    onDragEnd = (): void => {},
+    callback = (): void => {}
   }: Parameter) {
     const parent = document.querySelector(el)
     this.canvas = document.createElement('canvas')
@@ -65,18 +65,18 @@ export default class XYPad {
     this.draggablePointer = new DraggablePointer({
       element: this.canvas,
       pointer: new Pointer(width / 2, height / 2),
-      onDragStart: p => {
+      onDragStart: (p): void => {
         this.pointRadius *= this.pointZoomRate
         this.render(p)
         this.onDragStart(p)
         this.callback(this.calcPoint(p))
       },
-      onDragMove: p => {
+      onDragMove: (p): void => {
         this.render(p)
         this.onDragMove(p)
         this.callback(this.calcPoint(p))
       },
-      onDragEnd: p => {
+      onDragEnd: (p): void => {
         this.pointRadius /= this.pointZoomRate
         this.render(p)
         this.onDragEnd(p)

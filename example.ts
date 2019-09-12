@@ -7,7 +7,7 @@ new XYPad({
   pointerColor: '#23CBF5',
   xRange: { min: -80, max: 80 },
   yRange: { min: -80, max: 80 },
-  callback(p) {
+  callback(p): void {
     output.innerHTML = p.toString()
 
     const { x, y } = p.point

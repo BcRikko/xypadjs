@@ -2,12 +2,12 @@ export class Pointer {
   private x: number
   private y: number
 
-  constructor(x: number = 0, y: number = 0) {
+  constructor(x = 0, y = 0) {
     this.x = x
     this.y = y
   }
 
-  get point() {
+  get point(): { x: number; y: number } {
     return {
       x: this.x,
       y: this.y
@@ -41,7 +41,7 @@ export class Pointer {
 
   add(x: number, y: number): Pointer
   add(pointer: Pointer): Pointer
-  add(x: number | Pointer, y?: number) {
+  add(x: number | Pointer, y?: number): Pointer {
     if (this.isPointer(x)) {
       const { x: dx, y: dy } = x.point
       return new Pointer(this.x + dx, this.y + dy)
@@ -52,7 +52,7 @@ export class Pointer {
 
   sub(x: number, y: number): Pointer
   sub(pointer: Pointer): Pointer
-  sub(x: number | Pointer, y?: number) {
+  sub(x: number | Pointer, y?: number): Pointer {
     if (this.isPointer(x)) {
       const { x: dx, y: dy } = x.point
       return new Pointer(this.x - dx, this.y - dy)
