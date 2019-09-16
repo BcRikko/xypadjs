@@ -68,18 +68,18 @@ export default class XYPad {
       onDragStart: (p): void => {
         this.pointRadius *= this.pointZoomRate
         this.render(p)
-        this.onDragStart(p)
+        this.onDragStart(this.calcPoint(p))
         this.callback(this.calcPoint(p))
       },
       onDragMove: (p): void => {
         this.render(p)
-        this.onDragMove(p)
+        this.onDragMove(this.calcPoint(p))
         this.callback(this.calcPoint(p))
       },
       onDragEnd: (p): void => {
         this.pointRadius /= this.pointZoomRate
         this.render(p)
-        this.onDragEnd(p)
+        this.onDragEnd(this.calcPoint(p))
         this.callback(this.calcPoint(p))
       }
     })
