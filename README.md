@@ -4,7 +4,7 @@ XYPad.js is XYPad controller component using Canvas API.
 
 XYPad.jsはCanvasAPIを使った2次元パッドコントローラのコンポーネントです。
 
-## :thinking_face: Examples
+## :books: Examples
 
 ![rikko](https://user-images.githubusercontent.com/5305599/64018969-df020680-cb68-11e9-8289-e5660f282cb6.gif)
 
@@ -47,6 +47,24 @@ new XYPad({
     // { x: 50, y: 30 }
     console.log(p.toString())
   })
+
+  // (Option)Callback to start dragging. The argument value is a Pointer class.
+  // (省略可能)ドラッグを開始したときのコールバックです。引数はPointerクラスです。
+  onDragStart: (pointer) => {
+    console.log('drag start:', p.toString())
+  }
+
+  // (Option)Callback while dragging. The argument value is a Pointer class.
+  // (省略可能)ドラッグ中のコールバックです。引数はPointerクラスです。
+  onDragMove: (pointer) => {
+    console.log('drag move:', p.toString())
+  }
+
+  // (Option)Callback when finished dragging. The argument value is a Pointer class.
+  // (省略可能)ドラッグを終了したときのコールバックです。引数はPointerクラスです。
+  onDragEnd: (pointer) => {
+    console.log('drag end:', p.toString())
+  }
 })
 ```
 
